@@ -56,26 +56,26 @@ def get_comp_teso():
 
 def enviar_mail(comprobantes_ok):
     if comprobantes_ok==1:
-        #try:
-        Outlook = win32.Dispatch('Outlook.application')
-        mail = Outlook.CreateItem(0)
-        #lista de emails a enviar en el txt
-        with open("lista_mails.txt","r") as mails:
-            lista_mails = mails.readlines()
-            mails.close()
+        try:
+            Outlook = win32.Dispatch('Outlook.application')
+            mail = Outlook.CreateItem(0)
+            #lista de emails a enviar en el txt
+            with open("lista_mails.txt","r") as mails:
+                lista_mails = mails.readlines()
+                mails.close()
 
-        mailTo=";".join(lista_mails)
-        mail.To = mailTo
-        hoy = datetime.today().strftime('%d-%m-%Y')
-        mail.Subject = f'Comprobantes pagina - {hoy}'
-        mail.Body = f'Comprobantes tesoreria día {hoy}'
-        cwd = os.getcwd()
-        attachment = os.path.join(cwd,"comprobantes.xlsx")
-        mail.Attachments.Add(attachment)
-        mail.Send()
-        print("Email de comprobantes enviado exitosamente!")
-        #except:
-            #print("Error al enviar el mail de los comprobantes, comprobar acceso a red y reintentar")
+            mailTo=";".join(lista_mails)
+            mail.To = mailTo
+            hoy = datetime.today().strftime('%d-%m-%Y')
+            mail.Subject = f'Comprobantes pagina - {hoy}'
+            mail.Body = f'Comprobantes tesoreria día {hoy}'
+            cwd = os.getcwd()
+            attachment = os.path.join(cwd,"comprobantes.xlsx")
+            mail.Attachments.Add(attachment)
+            mail.Send()
+            print("Email de comprobantes enviado exitosamente!")
+        except:
+            print("Error al enviar el mail de los comprobantes, comprobar acceso a red y reintentar")
 
 comprobantes_ok = get_comp_teso()# si retorna 1, no hay error y se envia el 
 enviar_mail(comprobantes_ok)
