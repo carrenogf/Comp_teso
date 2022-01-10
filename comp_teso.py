@@ -13,8 +13,8 @@ import sys
 import os
 
 def get_comp_teso():
-    usuario = "sadmin"
-    contraseña = "sadmin00"
+    usuario = ""
+    contraseña = ""
     options = webdriver.ChromeOptions()
     options.add_argument('--disable-download-notification')
     options.add_argument('--headless')
